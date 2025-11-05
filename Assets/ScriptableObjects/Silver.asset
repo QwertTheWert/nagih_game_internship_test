@@ -13,4 +13,5 @@ MonoBehaviour:
   m_Name: Silver
   m_EditorClassIdentifier: 
   value: 30
+  rarity: 2
   borderSprite: {fileID: 21300000, guid: f20d12412f874c846803fdc379b408f5, type: 3}

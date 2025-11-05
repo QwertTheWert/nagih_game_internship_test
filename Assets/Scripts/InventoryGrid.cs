@@ -5,16 +5,12 @@ using UnityEngine;
 public class InventoryGrid : MonoBehaviour
 {
 	public GameObject inventoryItemPrefab;
-	// Start is called before the first frame update
-	void Start()
-	{
 
-	}
-
+	// Adding an item to the grid and setting its index in the grid
 	public void AddItem(RarityObject rarity, int itemIndex)
 	{
 		GameObject itemInstance = Instantiate(inventoryItemPrefab);
-		itemInstance.GetComponent<InventoryItem>().SetRarity(rarity);
+		itemInstance.GetComponent<InventoryItem>().rarityObject = rarity;
 		itemInstance.transform.SetParent(transform);
 		itemInstance.transform.SetSiblingIndex(itemIndex);
 	}

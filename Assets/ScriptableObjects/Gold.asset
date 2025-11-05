@@ -10,7 +10,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8f075fd147495534593d4a6b7aaafd6e, type: 3}
-  m_Name: Diamond
+  m_Name: Gold
   m_EditorClassIdentifier: 
-  value: 50
-  borderSprite: {fileID: 21300000, guid: 665b51c52ac98da4aaf5d224001d7268, type: 3}
+  value: 40
+  rarity: 3
+  borderSprite: {fileID: 21300000, guid: fe7a6637c623a464d9ac4b1c90daafae, type: 3}

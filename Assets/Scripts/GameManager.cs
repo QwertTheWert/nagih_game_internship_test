@@ -1,10 +1,7 @@
-using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 
-public class GameManager : MonoBehaviour
-{
+public class GameOverManager : MonoBehaviour
+{ // This script only exists to check if the game is over, 
 	static void CheckIfGameOver()
 	{
 		int sumValue = CoinManager.GetCoins() + InventoryManager.GetTotalItemValue();

@@ -14,6 +14,7 @@ public class RarityChanceController : MonoBehaviour
 		Invoke(nameof(AddRarityChanceInputs), 0.01f);
 	}
 
+	// Itterate through the input and add it to the list
 	public void AddRarityChanceInputs()
 	{
 		for (int i = 0; i < transform.childCount; i++)
