@@ -28,12 +28,10 @@ public class GachaButton : MonoBehaviour
 		{
 			if (CoinManager.Spend(pullCost) != -1)
 			{
-				RarityObject result = GachaPull(pullTreshold);
+				InventoryManager.Gain(GachaPull(pullTreshold));
 				UpdateCoinLabelText();
-				Debug.Log(result);
-			} else
-			{
-				Debug.Log("NO MONEY!!!!");
+
+				
 			}
 		}
 		else
