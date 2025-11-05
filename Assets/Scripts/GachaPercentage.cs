@@ -2,9 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GachaInput : MonoBehaviour
+public class GachaPercentage : MonoBehaviour
 {
-	private RarityInput[] rarityInputs; 
+	private RarityPercentageInput[] rarityInputs; 
 	// public int 
 	// Start is called before the first frame update
 	void Start()
