@@ -4,5 +4,6 @@ using UnityEngine;
 public class RarityObject : ScriptableObject
 {
 	public int value;
+	public Rarity rarity;
 	public Sprite borderSprite;
 }

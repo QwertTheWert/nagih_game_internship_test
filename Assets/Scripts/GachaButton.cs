@@ -18,7 +18,7 @@ public class GachaButton : MonoBehaviour
 		btn.onClick.AddListener(ValidateGachaPull);
 
 		coinLabel = transform.Find("CoinLabel").GetComponent<Text>();
-		UpdateCoinLabelText();
+		Invoke(nameof(UpdateCoinLabelText), 0.01f);
 	}
 	
 	void ValidateGachaPull()
@@ -30,7 +30,7 @@ public class GachaButton : MonoBehaviour
 			{
 				InventoryManager.Gain(GachaPull(pullTreshold));
 				UpdateCoinLabelText();
-
+				
 				
 			}
 		}
@@ -73,7 +73,7 @@ RarityObject GachaPull(List<int> pullTreshold)
 	
 	void UpdateCoinLabelText()
 	{
-		coinLabel.text = string.Format("My Coins : {0}", coinManager.coins);
+		coinLabel.text = string.Format("My Coins : {0}", CoinManager.Get());
 	}
 
 

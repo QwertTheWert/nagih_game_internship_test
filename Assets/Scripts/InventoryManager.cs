@@ -1,8 +1,11 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class InventoryManager : MonoBehaviour
 {
+	public InventoryLabel inventoryLabel;
+	public InventoryGrid grid;
 	private static InventoryManager instance;
 	private Dictionary<RarityObject, int> inventory = new();
 
@@ -31,6 +34,14 @@ public class InventoryManager : MonoBehaviour
 	{
 		instance.inventory[key] += 1;
 		Debug.Log(key.name + " : " + instance.inventory[key]);
+		instance.inventoryLabel.SetText(GetTotalItemValue());
+		int rarityInt = (int)key.rarity;
+		int itemIndex = 0;
+		for (int i = rarityInt; i < (int)Rarity.Diamond; i++)
+		{
+			itemIndex += instance.inventory[RarityManager.GetRarity((Rarity)i)];	
+		}
+		instance.grid.AddItem(key, itemIndex);
 	}
 
 	public static void Sell(RarityObject key)
