@@ -11,20 +11,29 @@ public class RarityChanceController : MonoBehaviour
 	void Awake()
 	{
 		instance = this;
+		Invoke(nameof(AddRarityChanceInputs), 0.01f);
 	}
 
-	public static void AddRarityChanceInputs(RarityChanceInput pr)
+	public void AddRarityChanceInputs()
 	{
-		instance.rarityChanceInputs.Add(pr);
+		for (int i = 0; i < transform.childCount; i++)
+		{
+			Transform child = transform.GetChild(i);
+			RarityChanceInput rci = child.GetComponent<RarityChanceInput>();
+			if (rci)
+			{
+				rarityChanceInputs.Add(rci);
+			}
+		}
 	}
 
 	public static List<int> GetPullTreshold()
 	{
 		int accum = 0;
 		List<int> pullTreshold = new();
-		foreach (RarityChanceInput rp in instance.rarityChanceInputs)
+		foreach (RarityChanceInput rc in instance.rarityChanceInputs)
 		{
-			int value = rp.GetValue();
+			int value = rc.GetValue();
 			pullTreshold.Add(value + accum);
 			accum += value;
 		} 

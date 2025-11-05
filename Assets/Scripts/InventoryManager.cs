@@ -1,10 +1,10 @@
-using System;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class InventoryManager : MonoBehaviour
 {
-	public InventoryLabel inventoryLabel;
+	public Text inventoryLabel;
 	public InventoryGrid grid;
 	private static InventoryManager instance;
 	private Dictionary<RarityObject, int> inventory = new();
@@ -24,20 +24,24 @@ public class InventoryManager : MonoBehaviour
 		AddToInventory(Rarity.Gold);
 		AddToInventory(Rarity.Diamond);
 	}
-	
+
 	void AddToInventory(Rarity rarity)
 	{
 		inventory.Add(RarityManager.GetRarity(rarity), 0);
+	}
+	
+	void UpdateInventoryLabel(int value)
+	{
+		inventoryLabel.text = string.Format("Storage Coin Value : {0}", value.ToString());
 	}
 
 	public static void Gain(RarityObject key)
 	{
 		instance.inventory[key] += 1;
-		Debug.Log(key.name + " : " + instance.inventory[key]);
-		instance.inventoryLabel.SetText(GetTotalItemValue());
+		instance.UpdateInventoryLabel(GetTotalItemValue());
 		int rarityInt = (int)key.rarity;
 		int itemIndex = 0;
-		for (int i = rarityInt; i < (int)Rarity.Diamond; i++)
+		for (int i = rarityInt+1; i <= (int)Rarity.Diamond; i++)
 		{
 			itemIndex += instance.inventory[RarityManager.GetRarity((Rarity)i)];	
 		}
@@ -47,7 +51,8 @@ public class InventoryManager : MonoBehaviour
 	public static void Sell(RarityObject key)
 	{
 		instance.inventory[key] -= 1;
-		CoinManager.Gain(key.value);
+		instance.UpdateInventoryLabel(GetTotalItemValue());
+		CoinManager.GainCoins(key.value);
 	}
 	
 	public static int GetTotalItemValue()

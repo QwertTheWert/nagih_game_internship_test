@@ -8,7 +8,6 @@ public class GachaButton : MonoBehaviour
 {
 	[SerializeField] private int pullCost = 30;
 	[SerializeField] private CoinManager coinManager;
-	private Text coinLabel;
 	private Button btn;
 
 	// Start is called before the first frame update
@@ -16,9 +15,6 @@ public class GachaButton : MonoBehaviour
 	{
 		btn = transform.Find("Button").GetComponent<Button>();
 		btn.onClick.AddListener(ValidateGachaPull);
-
-		coinLabel = transform.Find("CoinLabel").GetComponent<Text>();
-		Invoke(nameof(UpdateCoinLabelText), 0.01f);
 	}
 	
 	void ValidateGachaPull()
@@ -26,12 +22,10 @@ public class GachaButton : MonoBehaviour
 		List<int> pullTreshold = RarityChanceController.GetPullTreshold();
 		if (ValidatePercentageArray(pullTreshold))
 		{
-			if (CoinManager.Spend(pullCost) != -1)
+			if (CoinManager.SpendCoins(pullCost) != -1)
 			{
+				
 				InventoryManager.Gain(GachaPull(pullTreshold));
-				UpdateCoinLabelText();
-				
-				
 			}
 		}
 		else
@@ -40,28 +34,30 @@ public class GachaButton : MonoBehaviour
 		}
 	}
 
-	bool ValidatePercentageArray(List<int> arr)
+	bool ValidatePercentageArray(List<int> pullTreshold)
 	{
-		return arr[^1] != 0;
+		return pullTreshold[pullTreshold.Count - 1] != 0;
 	}
 
 RarityObject GachaPull(List<int> pullTreshold)
 	{
-		int maxValue = pullTreshold[^1];
+		int maxValue = pullTreshold[pullTreshold.Count - 1];
 		int resultInt = Random.Range(1, maxValue + 1);
-		if (resultInt <= pullTreshold[0])
+		Debug.Log(resultInt);
+
+		if (resultInt <= pullTreshold[(int) Rarity.Metal])
 		{
 			return RarityManager.GetRarity(Rarity.Metal);
 		}
-		else if (resultInt <= pullTreshold[1])
+		else if (resultInt <= pullTreshold[(int) Rarity.Bronze])
 		{
 			return RarityManager.GetRarity(Rarity.Bronze);
 		}
-		else if (resultInt <= pullTreshold[2])
+		else if (resultInt <= pullTreshold[(int) Rarity.Silver])
 		{
 			return RarityManager.GetRarity(Rarity.Silver);
 		}
-		else if (resultInt <= pullTreshold[3])
+		else if (resultInt <= pullTreshold[(int) Rarity.Gold])
 		{
 			return RarityManager.GetRarity(Rarity.Gold);
 		}
@@ -71,10 +67,6 @@ RarityObject GachaPull(List<int> pullTreshold)
 		}
 	}
 	
-	void UpdateCoinLabelText()
-	{
-		coinLabel.text = string.Format("My Coins : {0}", CoinManager.Get());
-	}
-
+	
 
 }

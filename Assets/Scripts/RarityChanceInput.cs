@@ -10,7 +10,6 @@ public class RarityChanceInput : MonoBehaviour
 	// Start is called before the first frame update
 	void Start()
 	{
-		RarityChanceController.AddRarityChanceInputs(this);
 
 		label = transform.Find("Label").GetComponent<Text>();
 		// Automatically Generate Label name based on selected rarity
